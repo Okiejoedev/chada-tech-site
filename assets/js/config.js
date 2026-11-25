@@ -25,7 +25,7 @@ window.CHADA = {
   whatsappCommunityLink: "",                 // https://chat.whatsapp.com/...
   businessWhatsapp: "",                      // display format, e.g. "0801 234 5678"
   businessWhatsappIntl: "",                  // digits only, e.g. "2348012345678" (for wa.me links)
-  contactEmail: "hello@chadatech.com",       // set up forwarding to Gmail in Namecheap
+  contactEmail: "",                          // CONFIRM: e.g. a Gmail for privacy requests
   tutorLinkedIn: "https://www.linkedin.com/in/",  // CONFIRM Joseph's LinkedIn URL
   socials: {
     instagram: "https://instagram.com/",

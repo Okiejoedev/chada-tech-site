@@ -6,7 +6,7 @@ You only need this if you change shared layout (header/footer/head). Day-to-day 
 import os, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_URL = "https://chadatech.com"
+SITE_URL = "https://okiejoedev.github.io/chada-tech-site"
 if "--url" in sys.argv:
     SITE_URL = sys.argv[sys.argv.index("--url") + 1].rstrip("/")
 VER = "1"

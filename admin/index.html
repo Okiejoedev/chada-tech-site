@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin | Chada Tech</title>
+<meta name="description" content="Chada Tech team admin.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#042D6A">
+<link rel="canonical" href="https://chadatech.com/admin/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chada Tech">
+<meta property="og:title" content="Chada Tech: learn to use AI on your phone">
+<meta property="og:description" content="Free live class Sat 28 Nov. Reply faster, sell more and get paid with AI.">
+<meta property="og:image" content="https://chadatech.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://chadatech.com/admin/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../icon-16.png">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=1">
+</head>
+<body data-page="admin" class="admin">
+
+<header class="site-header"><div class="wrap"><a class="logo" href="../"><img src="../assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a><span class="small">Team admin</span></div></header>
+<main id="main" class="section" style="padding-top:32px">
+  <div class="wrap" style="max-width:1300px">
+    <div id="signin" class="form-card hidden" style="max-width:480px;margin:0 auto">
+      <h1 style="font-size:1.6rem">Team sign in</h1>
+      <p class="small">We'll email you a sign-in link. Only emails in the admins list can see data.</p>
+      <div class="form-alert" role="alert"></div>
+      <div class="field"><label for="a_email">Email</label><input id="a_email" type="email" autocomplete="email"></div>
+      <button class="btn btn-block" id="a_send">Email me a sign-in link</button>
+    </div>
+
+    <div id="dash" class="hidden">
+      <div class="admin-bar" style="justify-content:space-between">
+        <h1 style="font-size:1.6rem;margin:0">Registrations</h1>
+        <span class="small"><span id="who"></span> · <a href="#" id="signout">Sign out</a></span>
+      </div>
+      <div class="tabs">
+        <button class="on" data-at="class_registrations">Class registrations <span class="pill" id="n-class_registrations">0</span></button>
+        <button data-at="memberships">Inner Circle <span class="pill" id="n-memberships">0</span></button>
+        <button data-at="reply_kit_leads">Reply Kit leads <span class="pill" id="n-reply_kit_leads">0</span></button>
+      </div>
+      <div class="admin-bar">
+        <input type="text" id="search" placeholder="Search name, number, business…">
+        <select id="filter" style="max-width:220px;min-height:44px;padding:8px 12px"></select>
+        <label class="check mb0" style="margin:0"><input type="checkbox" id="only-updates"> Only opted in to updates</label>
+        <button class="btn btn-sm" id="export">Export CSV</button>
+        <button class="btn btn-sm btn-ghost" id="copy-nums">Copy WhatsApp numbers</button>
+        <button class="btn btn-sm btn-ghost" id="refresh">Refresh</button>
+      </div>
+      <div class="form-alert" id="dash-alert"></div>
+      <div class="table-wrap"><table id="tbl"></table></div>
+      <p class="small mt2">"Copy WhatsApp numbers" copies the numbers of the rows shown. Tick "Only opted in to updates" before copying numbers for a broadcast.</p>
+    </div>
+  </div>
+</main>
+<script src="../assets/js/config.js?v=1"></script>
+<script src="../assets/js/app.js?v=1"></script>
+<script src="../assets/js/vendor/supabase.js"></script>
+<script src="../assets/js/admin.js?v=1"></script>
+</body></html>

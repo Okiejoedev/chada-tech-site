@@ -14,6 +14,7 @@ window.CHADA = {
   freeClass: {
     code: "free-2026-11-28",                 // saved with each registration
     dateLabel: "Saturday 28 November 2026",
+    shortLabel: "Sat 28 Nov",                 // used on buttons
     timeLabel: "11:00 am (WAT)",             // CONFIRM: 11 am or 4 pm
     startISO: "2026-11-28T11:00:00+01:00",   // CONFIRM: same time, used for "Add to calendar"
     minutes: 45,
@@ -26,12 +27,12 @@ window.CHADA = {
   businessWhatsapp: "",                      // display format, e.g. "0801 234 5678"
   businessWhatsappIntl: "",                  // digits only, e.g. "2348012345678" (for wa.me links)
   contactEmail: "",                          // CONFIRM: e.g. a Gmail for privacy requests
-  tutorLinkedIn: "https://www.linkedin.com/in/",  // CONFIRM Joseph's LinkedIn URL
-  socials: {
-    instagram: "https://instagram.com/",
-    tiktok: "https://tiktok.com/@",
-    facebook: "https://facebook.com/",
-    x: "https://x.com/"
+  tutorLinkedIn: "",                         // CONFIRM Joseph's LinkedIn URL
+  socials: {                                 // full profile links; empty = hidden
+    instagram: "",
+    tiktok: "",
+    facebook: "",
+    x: ""
   },
 
   /* ---- Inner Circle tracks (CONFIRM prices). status: "open" or "waitlist" ---- */

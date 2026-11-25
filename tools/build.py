@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = "https://okiejoedev.github.io/chada-tech-site"
 if "--url" in sys.argv:
     SITE_URL = sys.argv[sys.argv.index("--url") + 1].rstrip("/")
-VER = "1"
+VER = "2"
 
 OG_TITLE = "Chada Tech: learn to use AI on your phone"
 OG_DESC = "Free live class Sat 28 Nov. Reply faster, sell more and get paid with AI."
@@ -53,7 +53,7 @@ def header(R):
     return f"""<a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="{R}" aria-label="Chada Tech home"><img src="{R}assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a>
+    <a class="logo" href="{R or './'}" aria-label="Chada Tech home"><img src="{R}assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a>
     <nav class="nav" aria-label="Main">
       <a href="{R}free-class/">Free class</a>
       <a href="{R}inner-circle/">Inner Circle</a>
@@ -91,7 +91,7 @@ def footer(R, bar=True, extra_js=""):
           <li><a href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">WhatsApp community</a></li>
         </ul>
       </div>
-      <div>
+      <div data-follow>
         <h4>Follow</h4>
         <ul>
           <li><a href="#" data-c-href="socials.instagram" target="_blank" rel="noopener">Instagram</a></li>
@@ -154,7 +154,7 @@ def home():
       <h1>Use AI on your phone to <span class="hl">reply faster</span>, sell more and get paid.</h1>
       <p class="sub">Live online classes that show you exactly how, step by step, with free tools you already have.</p>
       <div class="btns">
-        <a class="btn" href="free-class/">Join the free class, Sat 28 Nov</a>
+        <a class="btn" href="free-class/">Join the free class, <span data-c="freeClass.shortLabel">Sat 28 Nov</span></a>
         <a class="btn btn-ghost" href="inner-circle/">See the Inner Circle</a>
       </div>
     </div>
@@ -177,7 +177,7 @@ def home():
   <div class="wrap">
     <span class="label">Problems we fix</span>
     <h2>Small daily jobs, done in seconds.</h2>
-    <div class="grid grid-4 mt2">
+    <div class="grid grid-4 compact mt2">
       <div class="card"><div class="icon-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/><path d="M12 8v4l2.5 1.5"/></svg></div><h3>Reply ‘How much?’ in 10 seconds</h3><p>Ready replies for the questions customers ask every day.</p></div>
       <div class="card"><div class="icon-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></div><h3>Turn a phone photo into a sale flyer</h3><p>Clean product photos and flyers, made on your phone.</p></div>
       <div class="card"><div class="icon-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19V5l10 14V5"/><path d="M4 10h16M4 14h16"/></svg></div><h3>Know your profit on every sale</h3><p>Simple pricing that covers your costs and pays you.</p></div>
@@ -661,7 +661,7 @@ def privacy():
     <h1>How we use your details</h1>
     <p class="small">Last updated 25 November 2026. This notice follows the Nigeria Data Protection Act 2023 (NDPA), and the EU GDPR where it applies to you.</p>
     <h2>1. Who we are</h2>
-    <p>Chada Tech (the Chada Tech Community, part of Chada Digital), Nigeria. Contact: <a href="#" data-c-href="contactEmail"><span data-c="contactEmail">[email to be added]</span></a>.</p>
+    <p>Chada Tech (the Chada Tech Community, part of Chada Digital), Nigeria.<span data-if-set="contactEmail"> Contact: <a href="#" data-c-href="contactEmail"><span data-c="contactEmail"></span></a>.</span></p>
     <h2>2. What we collect</h2>
     <ul>
       <li>Your name, WhatsApp number and email.</li>
@@ -683,7 +683,7 @@ def privacy():
       <li>Student proofs: deleted 30 days after we check them.</li>
     </ul>
     <h2>6. Your rights</h2>
-    <p>You can ask to see, correct or delete your data, object to how we use it, or withdraw your consent at any time. Message us on WhatsApp (<a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp">our business number</span></a>) or email <a href="#" data-c-href="contactEmail"><span data-c="contactEmail">us</span></a>. You can also complain to the Nigeria Data Protection Commission (NDPC).</p>
+    <p>You can ask to see, correct or delete your data, object to how we use it, or withdraw your consent at any time. <span data-if-set="businessWhatsapp">Message us on WhatsApp at <a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp"></span></a>. </span><span data-if-set="contactEmail">Email <a href="#" data-c-href="contactEmail"><span data-c="contactEmail"></span></a>. </span><span data-if-missing="businessWhatsapp">Send us a message on any of our social pages or in the WhatsApp community. </span>You can also complain to the Nigeria Data Protection Commission (NDPC).</p>
     <h2>7. Security</h2>
     <p>Our database only lets visitors add a registration. Only signed-in Chada Tech team admins can read it. Student proofs are stored in a private folder.</p>
     <h2>8. Cookies and analytics</h2>
@@ -704,7 +704,7 @@ def refund():
     <p>If the Inner Circle isn't right for you, ask for a refund within <span data-c="refundDays">7</span> days of your first class and we'll refund you in full.</p>
     <h2>How to ask</h2>
     <ol>
-      <li>Message us on WhatsApp (<a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp">our business number</span></a>) with your name and your Paystack payment reference.</li>
+      <li>Message us on WhatsApp<span data-if-set="businessWhatsapp"> at <a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp"></span></a></span> with your name and your Paystack payment reference.</li>
       <li>We confirm within 2 working days.</li>
       <li>Refunds go back through Paystack to the card or account you paid with, within 5 to 10 working days.</li>
     </ol>
@@ -771,7 +771,7 @@ def notfound():
     return head("Page not found | Chada Tech", "Page not found.", "404.html", R, noindex=True) + '<body data-page="404">\n' + header(R) + f"""
 <main id="main"><section class="section"><div class="wrap narrow center">
 <h1>We can't find that page.</h1><p class="lead">The link may be old. Try one of these:</p>
-<div class="btns" style="justify-content:center"><a class="btn" href="{R}free-class/">Join the free class</a><a class="btn btn-ghost" href="{R}reply-kit/">Free Reply Kit</a><a class="btn btn-ghost" href="{R}">Home</a></div>
+<div class="btns" style="justify-content:center"><a class="btn" href="{R}free-class/">Join the free class</a><a class="btn btn-ghost" href="{R}reply-kit/">Free Reply Kit</a><a class="btn btn-ghost" href="{R or './'}">Home</a></div>
 </div></section></main>
 """ + footer(R, bar=False)
 

@@ -227,3 +227,11 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .bg-navy .track .btn{background:var(--navy);color:#fff;border-color:var(--navy)}
 .bg-navy .track .btn-ghost{background:#fff;color:var(--navy);border-color:var(--navy)}
 .icon-dot svg{width:24px;height:24px}
+
+@media(max-width:639px){
+  .grid-4.compact{grid-template-columns:1fr 1fr;gap:12px}
+  .grid-4.compact .card{padding:18px 16px}
+  .grid-4.compact .card h3{font-size:1rem}
+  .grid-4.compact .card p{font-size:.88rem}
+  .grid-4.compact .icon-dot{width:40px;height:40px;margin-bottom:12px}
+}

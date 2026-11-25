@@ -109,7 +109,13 @@
       var key = el.getAttribute("data-c-href"), v = CT.get(key);
       if (key === "contactEmail" && v) v = "mailto:" + v;
       if (key === "businessWhatsappIntl" && v) v = "https://wa.me/" + v;
-      if (v) el.href = v; else el.setAttribute("data-missing", "1");
+      if (v) { el.href = v; return; }
+      // no value yet: never show a dead link
+      var li = el.closest("li"), grp = el.closest("[data-hide-if-empty]");
+      if (grp) grp.classList.add("hidden");
+      else if (li) li.classList.add("hidden");
+      else if (el.classList.contains("btn")) el.classList.add("hidden");
+      else { var sp = document.createElement("span"); sp.innerHTML = el.innerHTML; el.replaceWith(sp); }
     });
     root.querySelectorAll("[data-price]").forEach(function (el) {
       var t = C.tracks && C.tracks[el.getAttribute("data-price")];
@@ -194,6 +200,8 @@
     });
     if (mn) mn.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { mn.classList.remove("open"); }); });
     CT.fill();
+    var fol = document.querySelector("[data-follow]");
+    if (fol && !Object.keys(C.socials || {}).some(function (k) { return C.socials[k]; })) fol.classList.add("hidden");
     CT.loadPlaces();
     var y = document.querySelector("[data-year]"); if (y) y.textContent = new Date().getFullYear();
   });

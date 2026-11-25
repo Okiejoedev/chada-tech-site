@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=1">
+<link rel="stylesheet" href="../assets/css/style.css?v=2">
 </head>
 <body data-page="privacy">
 <a class="skip" href="#main">Skip to content</a>
@@ -57,7 +57,7 @@
     <h1>How we use your details</h1>
     <p class="small">Last updated 25 November 2026. This notice follows the Nigeria Data Protection Act 2023 (NDPA), and the EU GDPR where it applies to you.</p>
     <h2>1. Who we are</h2>
-    <p>Chada Tech (the Chada Tech Community, part of Chada Digital), Nigeria. Contact: <a href="#" data-c-href="contactEmail"><span data-c="contactEmail">[email to be added]</span></a>.</p>
+    <p>Chada Tech (the Chada Tech Community, part of Chada Digital), Nigeria.<span data-if-set="contactEmail"> Contact: <a href="#" data-c-href="contactEmail"><span data-c="contactEmail"></span></a>.</span></p>
     <h2>2. What we collect</h2>
     <ul>
       <li>Your name, WhatsApp number and email.</li>
@@ -79,7 +79,7 @@
       <li>Student proofs: deleted 30 days after we check them.</li>
     </ul>
     <h2>6. Your rights</h2>
-    <p>You can ask to see, correct or delete your data, object to how we use it, or withdraw your consent at any time. Message us on WhatsApp (<a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp">our business number</span></a>) or email <a href="#" data-c-href="contactEmail"><span data-c="contactEmail">us</span></a>. You can also complain to the Nigeria Data Protection Commission (NDPC).</p>
+    <p>You can ask to see, correct or delete your data, object to how we use it, or withdraw your consent at any time. <span data-if-set="businessWhatsapp">Message us on WhatsApp at <a href="#" data-c-href="businessWhatsappIntl"><span data-c="businessWhatsapp"></span></a>. </span><span data-if-set="contactEmail">Email <a href="#" data-c-href="contactEmail"><span data-c="contactEmail"></span></a>. </span><span data-if-missing="businessWhatsapp">Send us a message on any of our social pages or in the WhatsApp community. </span>You can also complain to the Nigeria Data Protection Commission (NDPC).</p>
     <h2>7. Security</h2>
     <p>Our database only lets visitors add a registration. Only signed-in Chada Tech team admins can read it. Student proofs are stored in a private folder.</p>
     <h2>8. Cookies and analytics</h2>
@@ -103,7 +103,7 @@
           <li><a href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">WhatsApp community</a></li>
         </ul>
       </div>
-      <div>
+      <div data-follow>
         <h4>Follow</h4>
         <ul>
           <li><a href="#" data-c-href="socials.instagram" target="_blank" rel="noopener">Instagram</a></li>
@@ -117,8 +117,8 @@
   </div>
 </footer>
 
-<script src="../assets/js/config.js?v=1"></script>
-<script src="../assets/js/app.js?v=1"></script>
+<script src="../assets/js/config.js?v=2"></script>
+<script src="../assets/js/app.js?v=2"></script>
 
 </body>
 </html>

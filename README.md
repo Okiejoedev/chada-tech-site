@@ -56,7 +56,7 @@ If a track's `paystackLink` is empty, sign-ups are still saved and the visitor i
 ### GitHub Pages
 1. Create a repo `chada-tech-site` on the Okiejoedev account. Upload everything in this folder (keep the folder structure, including `.nojekyll`).
 2. Repo **Settings → Pages → Deploy from a branch → main / (root)** → Save.
-3. Site goes live at `https://okiejoedev.github.io/chada-tech-site/` in about a minute.
+3. Site goes live at `https://chadatech.com/` in about a minute.
 4. Custom domain: Settings → Pages → Custom domain → enter it, add the DNS records GitHub shows, tick **Enforce HTTPS**.
 
 ### Netlify (easiest)
@@ -65,7 +65,7 @@ If a track's `paystackLink` is empty, sign-ups are still saved and the visitor i
 3. **Domain management → Add a domain**; HTTPS is automatic.
 
 ### When the domain changes
-Link previews (WhatsApp cards) and the 404 page use the full site address. It is set to `https://okiejoedev.github.io/chada-tech-site`. When you move to your own domain, either run
+Link previews (WhatsApp cards) and the 404 page use the full site address. It is set to `https://chadatech.com`. When you move to your own domain, either run
 `python3 tools/build.py --url https://your-domain` or find-and-replace that address across the `.html` files.
 
 ## 4. Admin

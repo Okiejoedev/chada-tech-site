@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE_URL = "https://chadatech.com"
 if "--url" in sys.argv:
     SITE_URL = sys.argv[sys.argv.index("--url") + 1].rstrip("/")
-VER = "2"
+VER = "3"
 
 OG_TITLE = "Chada Tech: learn to use AI on your phone"
 OG_DESC = "Free live class Sat 28 Nov. Reply faster, sell more and get paid with AI."
@@ -55,19 +55,20 @@ def header(R):
   <div class="wrap">
     <a class="logo" href="{R or './'}" aria-label="Chada Tech home"><img src="{R}assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a>
     <nav class="nav" aria-label="Main">
+      <a href="{R}store/">Ebook store</a>
       <a href="{R}free-class/">Free class</a>
       <a href="{R}inner-circle/">Inner Circle</a>
-      <a href="{R}reply-kit/">Free Reply Kit</a>
-      <a href="{R}#faq">FAQ</a>
+      <a href="{R}account/" data-account-link>Sign in</a>
       <a class="btn btn-sm" href="{R}free-class/">Join the free class</a>
     </nav>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false">{MENU_SVG}</button>
   </div>
   <div class="mobile-nav">
+    <a href="{R}store/">Ebook store</a>
     <a href="{R}free-class/">Free class</a>
     <a href="{R}inner-circle/">Inner Circle</a>
-    <a href="{R}reply-kit/">Free Reply Kit</a>
-    <a href="{R}#faq">FAQ</a>
+    <a href="{R or './'}#faq">FAQ</a>
+    <a href="{R}account/" data-account-link>Sign in</a>
     <a class="btn" href="{R}free-class/">Join the free class</a>
   </div>
 </header>
@@ -87,7 +88,8 @@ def footer(R, bar=True, extra_js=""):
         <ul>
           <li><a href="{R}free-class/">Free class</a></li>
           <li><a href="{R}inner-circle/">Inner Circle</a></li>
-          <li><a href="{R}reply-kit/">Free Customer Reply Kit</a></li>
+          <li><a href="{R}store/">Ebook store</a></li>
+          <li><a href="{R}account/">My library</a></li>
           <li><a href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">WhatsApp community</a></li>
         </ul>
       </div>
@@ -107,6 +109,7 @@ def footer(R, bar=True, extra_js=""):
 {sticky}
 <script src="{R}assets/js/config.js?v={VER}"></script>
 <script src="{R}assets/js/app.js?v={VER}"></script>
+<script src="{R}assets/js/auth.js?v={VER}"></script>
 {extra_js}
 </body>
 </html>
@@ -187,11 +190,12 @@ def home():
 </section>
 
 <section class="section bg-grey">
-  <div class="wrap narrow center">
-    <span class="label">Free tool</span>
-    <h2>Free Customer Reply Kit</h2>
-    <p class="lead">Answer 6 questions. Get ready-to-send replies for your customers, free.</p>
-    <a class="btn" href="reply-kit/">Get my free replies</a>
+  <div class="wrap">
+    <span class="label">Ebook store</span>
+    <h2>Practical AI ebooks for Nigerian businesses and careers</h2>
+    <p class="lead">30 step-by-step guides with copy-paste prompts, real naira examples and templates. Start with a free one.</p>
+    <div class="books mt2" id="home-books"></div>
+    <div class="btns"><button class="btn" type="button" data-open-signup>Get the free ebook</button><a class="btn btn-ghost" href="store/">Browse all 30 ebooks</a></div>
   </div>
 </section>
 
@@ -282,7 +286,7 @@ def home():
   </div>
 </section>
 </main>
-""" + footer(R, extra_js=f'<script src="assets/js/pages.js?v={VER}"></script>')
+""" + footer(R, extra_js=f'<script src="assets/js/pages.js?v={VER}"></script><script src="assets/js/catalogue.js?v={VER}"></script><script src="assets/js/store.js?v={VER}"></script>')
 
 def TRACKS_HTML(R):
     return f"""<div class="grid grid-3 mt2">
@@ -292,7 +296,7 @@ def TRACKS_HTML(R):
         <p class="for">You sell, run a business or are starting one.</p>
         <p class="price" data-price="business">₦50,000</p>
         <p class="per">per 3 months · <span data-month="business"></span></p>
-        <ul><li>A 50-minute live class every Saturday</li><li>Recording, handout and a practical task</li><li>Your Customer Reply Kit set up with you in Week 1</li><li>Monthly AI update</li><li>Founding members keep this price at renewal</li></ul>
+        <ul><li>A 50-minute live class every Saturday</li><li>Recording, handout and a practical task</li><li>Your WhatsApp replies set up with you in Week 1</li><li>Every Chada Tech ebook free (30 titles)</li><li>Founding members keep this price at renewal</li></ul>
         <a class="btn" data-track-btn="business" href="{R}join/?track=business">Join the Business track</a>
       </div>
       <div class="track">
@@ -318,7 +322,7 @@ def TRACKS_HTML(R):
 CURRICULUM_HTML = """<div class="table-wrap mt2"><table class="curr">
 <thead><tr><th>Class</th><th>Date</th><th>Topic</th><th>You leave with</th></tr></thead>
 <tbody>
-<tr><td>Class 1</td><td data-l="Date">Sat 5 Dec 2026</td><td data-l="Topic"><strong>Put your WhatsApp on autopilot</strong></td><td data-l="You leave with">Quick replies, greeting and away messages, catalogue and a short link with a ready first message, using your Reply Kit</td></tr>
+<tr><td>Class 1</td><td data-l="Date">Sat 5 Dec 2026</td><td data-l="Topic"><strong>Put your WhatsApp on autopilot</strong></td><td data-l="You leave with">Quick replies, greeting and away messages, catalogue and a short link with a ready first message</td></tr>
 <tr><td>Class 2</td><td data-l="Date">Sat 12 Dec</td><td data-l="Topic"><strong>Turn posts and comments into orders</strong></td><td data-l="You leave with">Captions that sell, a week of posts scheduled in Meta Business Suite, and a plan to move comments into DMs</td></tr>
 <tr><td>Class 3</td><td data-l="Date">Sat 19 Dec</td><td data-l="Topic"><strong>Get paid and track orders</strong></td><td data-l="You leave with">A Paystack payment link or free storefront, a payment message and a simple sales record done with AI</td></tr>
 <tr><td>Class 4</td><td data-l="Date">Sat 9 Jan 2027</td><td data-l="Topic"><strong>Product photos, flyers and pricing for profit</strong></td><td data-l="You leave with">Clean product photos, 3 flyers, and a lowest-price check for your top products</td></tr>
@@ -386,7 +390,7 @@ def thanks_class():
       <p id="meet-line" class="mb0">We'll send the class link in the WhatsApp community and to your WhatsApp on the day.</p>
     </div>
     <p class="notice" data-if-set="businessWhatsapp">Save our number <strong data-c="businessWhatsapp"></strong> so you don't miss the link.</p>
-    <p class="mt2"><strong>While you wait:</strong> <a href="{R}reply-kit/">get your free Customer Reply Kit</a>.</p>
+    <p class="mt2"><strong>While you wait:</strong> <a href="{R}account/">create your free account</a> and get <em>The 15-Minute AI Starter</em> ebook.</p>
   </div>
 </section>
 </main>
@@ -412,13 +416,14 @@ def inner_circle():
   <div class="wrap">
     <span class="label">What Business members get</span>
     <h2>Every week, something that works on your phone.</h2>
+    <p class="lead">Plus a monthly AI update on new free tools worth knowing.</p>
     <div class="grid grid-3 mt2">
       <div class="card"><h3>Live class every Saturday</h3><p>50 minutes on Google Meet, with live screen share.</p></div>
       <div class="card"><h3>The recording</h3><p>Watch again any time, or catch up if you miss a class.</p></div>
       <div class="card"><h3>A short handout</h3><p>The steps from each class, written down.</p></div>
       <div class="card"><h3>One practical task</h3><p>Posted in the members' WhatsApp group after every class.</p></div>
-      <div class="card"><h3>Your Customer Reply Kit</h3><p>Set up with you in Week 1.</p></div>
-      <div class="card"><h3>Monthly AI update</h3><p>New free tools worth knowing, explained simply.</p></div>
+      <div class="card"><h3>WhatsApp on autopilot</h3><p>Your replies, greeting and away messages set up with you in Week 1.</p></div>
+      <div class="card"><h3>Every ebook free</h3><p>All 30 Chada Tech ebooks, including new ones as they come out. Worth over ₦130,000.</p></div>
     </div>
   </div>
 </section>
@@ -494,7 +499,7 @@ def thanks_join():
     </div>
     <p data-if-set="businessWhatsapp">Questions: <a href="#" data-c-href="businessWhatsappIntl" target="_blank" rel="noopener"><span data-c="businessWhatsapp"></span></a></p>
     <div class="btns" style="justify-content:center">
-      <a class="btn" href="{R}reply-kit/">Get your free Customer Reply Kit</a>
+      <a class="btn" href="{R}store/">Browse the ebook store</a>
       <a class="btn btn-ghost" href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">Join the WhatsApp community</a>
     </div>
   </div>
@@ -667,6 +672,8 @@ def privacy():
       <li>Your name, WhatsApp number and email.</li>
       <li>What you sell or do, and how you heard about us.</li>
       <li>For the Student track: a proof of studentship (student ID or admission letter).</li>
+      <li>For your Chada Tech account: your name, WhatsApp number, email, a securely stored password, and the ebooks you buy or ask to be told about.</li>
+      <li>For ebook purchases: the amount, date and Paystack reference. Paystack handles your card or bank details; we never see them.</li>
       <li>For the Reply Kit: your first name, WhatsApp number, business name, what you sell, city and chosen tone. <strong>The bank details you type into the Reply Kit never leave your phone.</strong> We never see or store them.</li>
     </ul>
     <h2>3. Why we use it (and our legal basis)</h2>
@@ -679,6 +686,7 @@ def privacy():
     <h2>5. How long we keep it</h2>
     <ul>
       <li>Free class and Reply Kit sign-ups: 12 months.</li>
+      <li>Your account and library: until you ask us to delete your account. Purchase records are kept as long as the law requires for financial records.</li>
       <li>Member and payment records: <span data-c="memberRecordsRetention">as long as the law requires</span>.</li>
       <li>Student proofs: deleted 30 days after we check them.</li>
     </ul>
@@ -719,6 +727,74 @@ def refund():
 </main>
 """ + footer(R, bar=False)
 
+# ------------------------------------------------------------------ STORE + ACCOUNT
+import sys as _s; _s.path.insert(0, os.path.dirname(__file__))
+from catalogue import COLLECTIONS, BOOKS, FREE, BUNDLES
+STORE_JS = lambda R: f'<script src="{R}assets/js/catalogue.js?v={VER}"></script><script src="{R}assets/js/store.js?v={VER}"></script>'
+def esc(t): return str(t).replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace('"',"&quot;")
+
+def store():
+    R = "../"
+    nav = "".join(f'<a href="#{c}">{esc(n)}</a>' for c,n in COLLECTIONS) + '<a href="#bundles">Bundles</a>'
+    return head("Ebook store | Chada Tech", "30 practical AI ebooks for Nigerian businesses, careers and side hustles, with copy-paste prompts, naira examples and templates.", "store/", R, og_title="Chada Tech ebook store: practical AI guides from ₦2,500", og_desc="WhatsApp sales, pricing, records, CVs, scholarships and more. Start with a free ebook.") + '<body data-page="store">\n' + header(R) + f"""
+<main id="main">
+<section class="section bg-grey" style="padding-top:40px">
+  <div class="wrap">
+    <span class="label">Ebook store</span>
+    <h1>Practical AI ebooks that pay for themselves</h1>
+    <p class="lead">Each ebook solves one job: a step-by-step process, copy-paste prompts, real naira examples and a template. Made for Nigerian businesses, careers and side hustles.</p>
+    <p class="small">Inner Circle members get every ebook free. <a href="{R}inner-circle/">See the Inner Circle</a></p>
+    <nav class="store-nav" aria-label="Collections">{nav}</nav>
+    <div id="shelves"><p class="small mt2">Loading the store…</p></div>
+  </div>
+</section>
+</main>
+""" + footer(R, bar=False, extra_js=STORE_JS(R))
+
+def book_page(slug, title, label, audience, price, inside, items=None):
+    R = "../../"
+    is_bundle = items is not None
+    if is_bundle:
+        tmap = {b[0]: b[2] for b in BOOKS}
+        body_list = "".join(f'<li><a href="{R}store/{i}/">{esc(tmap[i])}</a></li>' for i in items)
+        what = f'<h2 style="font-size:1.3rem">What\'s in the bundle</h2><ul class="inside">{body_list}</ul>'
+    else:
+        what = '<h2 style="font-size:1.3rem">What\'s inside</h2><ul class="inside">' + "".join(f"<li>{esc(i)}</li>" for i in inside) + "</ul>" + \
+               '<p class="small">Format: PDF that reads well on a phone. Includes copy-paste prompts that work in ChatGPT, Gemini, Claude and Meta AI.</p>'
+    price_txt = "Free" if price == 0 else f"₦{price:,}"
+    desc = (f"{title}: {label}. " + (", ".join(inside[:2]) if inside else ""))[:155]
+    return head(f"{esc(title)} | Chada Tech ebooks", esc(desc), f"store/{slug}/", R, og_title=esc(title) + " | Chada Tech", og_desc=esc(desc)) + f'<body data-page="book" data-book="{slug}">\n' + header(R) + f"""
+<main id="main">
+<section class="section" style="padding-top:32px">
+  <div class="wrap">
+    <p class="small"><a href="{R}store/">← Ebook store</a></p>
+    <div class="book-hero mt2">
+      <div id="book-cover"></div>
+      <div>
+        <span class="label">{esc(label)}</span>
+        <h1 style="font-size:clamp(1.8rem,6vw,2.6rem)">{esc(title)}</h1>
+        <p class="lead">For: {esc(audience)}</p>
+        <p class="price-big">{price_txt}</p>
+        <div id="book-status" style="margin:8px 0 16px"></div>
+        <div id="book-actions"><p class="small">Loading…</p></div>
+        <div class="mt2">{what}</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+""" + footer(R, bar=False, extra_js=STORE_JS(R) + f'<script>document.getElementById("book-cover").innerHTML=CT.cover((window.CATALOGUE.books.concat(window.CATALOGUE.bundles).find(function(b){{return b.slug==="{slug}"}}))||{{title:{title!r},slug:"{slug}"}},"lg");</script>')
+
+def account():
+    R = "../"
+    return head("My library | Chada Tech", "Your Chada Tech account and ebooks.", "account/", R, noindex=True) + '<body data-page="account" data-no-welcome>\n' + header(R) + f"""
+<main id="main">
+<section class="section bg-grey" style="padding-top:40px;min-height:60vh">
+  <div class="wrap" id="account"><p class="small">Loading your account…</p></div>
+</section>
+</main>
+""" + footer(R, bar=False, extra_js=STORE_JS(R))
+
 # ------------------------------------------------------------------ ADMIN
 def admin():
     R = "../"
@@ -742,6 +818,10 @@ def admin():
       <div class="tabs">
         <button class="on" data-at="class_registrations">Class registrations <span class="pill" id="n-class_registrations">0</span></button>
         <button data-at="memberships">Inner Circle <span class="pill" id="n-memberships">0</span></button>
+        <button data-at="profiles">Members <span class="pill" id="n-profiles">0</span></button>
+        <button data-at="purchases">Purchases <span class="pill" id="n-purchases">0</span></button>
+        <button data-at="products">Store <span class="pill" id="n-products">0</span></button>
+        <button data-at="book_interest">Notify me <span class="pill" id="n-book_interest">0</span></button>
         <button data-at="reply_kit_leads">Reply Kit leads <span class="pill" id="n-reply_kit_leads">0</span></button>
       </div>
       <div class="admin-bar">
@@ -754,6 +834,7 @@ def admin():
       </div>
       <div class="form-alert" id="dash-alert"></div>
       <div class="table-wrap"><table id="tbl"></table></div>
+      <input type="file" id="upload-input" accept="application/pdf" class="hidden">
       <p class="small mt2">"Copy WhatsApp numbers" copies the numbers of the rows shown. Tick "Only opted in to updates" before copying numbers for a broadcast.</p>
     </div>
   </div>
@@ -771,7 +852,7 @@ def notfound():
     return head("Page not found | Chada Tech", "Page not found.", "404.html", R, noindex=True) + '<body data-page="404">\n' + header(R) + f"""
 <main id="main"><section class="section"><div class="wrap narrow center">
 <h1>We can't find that page.</h1><p class="lead">The link may be old. Try one of these:</p>
-<div class="btns" style="justify-content:center"><a class="btn" href="{R}free-class/">Join the free class</a><a class="btn btn-ghost" href="{R}reply-kit/">Free Reply Kit</a><a class="btn btn-ghost" href="{R or './'}">Home</a></div>
+<div class="btns" style="justify-content:center"><a class="btn" href="{R}free-class/">Join the free class</a><a class="btn btn-ghost" href="{R}store/">Ebook store</a><a class="btn btn-ghost" href="{R or './'}">Home</a></div>
 </div></section></main>
 """ + footer(R, bar=False)
 
@@ -787,4 +868,12 @@ if __name__ == "__main__":
     page("refund/index.html", refund())
     page("admin/index.html", admin())
     page("404.html", notfound())
+    page("store/index.html", store())
+    page("account/index.html", account())
+    col = dict(COLLECTIONS)
+    for slug, c, title, aud, price, wave, inside in BOOKS:
+        page(f"store/{slug}/index.html", book_page(slug, title, col[c], aud, price, inside))
+    for slug, title, sub, price, items in BUNDLES:
+        page(f"store/{slug}/index.html", book_page(slug, title, "Bundle", sub, price, [], items))
+    page(f"store/{FREE[0]}/index.html", book_page(FREE[0], FREE[1], "Free ebook", "Everyone with a free account", 0, ["15 copy-paste prompts for the jobs that eat your day: replies, captions, pricing, records and planning", "Each prompt with a Nigerian example and how to adapt it", "A 15-minute daily routine that saves about an hour", "Free with a Chada Tech account"]))
     print("Built pages for", SITE_URL)

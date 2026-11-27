@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2">
+<link rel="stylesheet" href="assets/css/style.css?v=3">
 </head>
 <body class="has-bar" data-page="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -33,19 +33,20 @@
   <div class="wrap">
     <a class="logo" href="./" aria-label="Chada Tech home"><img src="assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a>
     <nav class="nav" aria-label="Main">
+      <a href="store/">Ebook store</a>
       <a href="free-class/">Free class</a>
       <a href="inner-circle/">Inner Circle</a>
-      <a href="reply-kit/">Free Reply Kit</a>
-      <a href="#faq">FAQ</a>
+      <a href="account/" data-account-link>Sign in</a>
       <a class="btn btn-sm" href="free-class/">Join the free class</a>
     </nav>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <div class="mobile-nav">
+    <a href="store/">Ebook store</a>
     <a href="free-class/">Free class</a>
     <a href="inner-circle/">Inner Circle</a>
-    <a href="reply-kit/">Free Reply Kit</a>
-    <a href="#faq">FAQ</a>
+    <a href="./#faq">FAQ</a>
+    <a href="account/" data-account-link>Sign in</a>
     <a class="btn" href="free-class/">Join the free class</a>
   </div>
 </header>
@@ -92,11 +93,12 @@
 </section>
 
 <section class="section bg-grey">
-  <div class="wrap narrow center">
-    <span class="label">Free tool</span>
-    <h2>Free Customer Reply Kit</h2>
-    <p class="lead">Answer 6 questions. Get ready-to-send replies for your customers, free.</p>
-    <a class="btn" href="reply-kit/">Get my free replies</a>
+  <div class="wrap">
+    <span class="label">Ebook store</span>
+    <h2>Practical AI ebooks for Nigerian businesses and careers</h2>
+    <p class="lead">30 step-by-step guides with copy-paste prompts, real naira examples and templates. Start with a free one.</p>
+    <div class="books mt2" id="home-books"></div>
+    <div class="btns"><button class="btn" type="button" data-open-signup>Get the free ebook</button><a class="btn btn-ghost" href="store/">Browse all 30 ebooks</a></div>
   </div>
 </section>
 
@@ -125,7 +127,7 @@
         <p class="for">You sell, run a business or are starting one.</p>
         <p class="price" data-price="business">₦50,000</p>
         <p class="per">per 3 months · <span data-month="business"></span></p>
-        <ul><li>A 50-minute live class every Saturday</li><li>Recording, handout and a practical task</li><li>Your Customer Reply Kit set up with you in Week 1</li><li>Monthly AI update</li><li>Founding members keep this price at renewal</li></ul>
+        <ul><li>A 50-minute live class every Saturday</li><li>Recording, handout and a practical task</li><li>Your WhatsApp replies set up with you in Week 1</li><li>Every Chada Tech ebook free (30 titles)</li><li>Founding members keep this price at renewal</li></ul>
         <a class="btn" data-track-btn="business" href="join/?track=business">Join the Business track</a>
       </div>
       <div class="track">
@@ -158,7 +160,7 @@
     <div class="table-wrap mt2"><table class="curr">
 <thead><tr><th>Class</th><th>Date</th><th>Topic</th><th>You leave with</th></tr></thead>
 <tbody>
-<tr><td>Class 1</td><td data-l="Date">Sat 5 Dec 2026</td><td data-l="Topic"><strong>Put your WhatsApp on autopilot</strong></td><td data-l="You leave with">Quick replies, greeting and away messages, catalogue and a short link with a ready first message, using your Reply Kit</td></tr>
+<tr><td>Class 1</td><td data-l="Date">Sat 5 Dec 2026</td><td data-l="Topic"><strong>Put your WhatsApp on autopilot</strong></td><td data-l="You leave with">Quick replies, greeting and away messages, catalogue and a short link with a ready first message</td></tr>
 <tr><td>Class 2</td><td data-l="Date">Sat 12 Dec</td><td data-l="Topic"><strong>Turn posts and comments into orders</strong></td><td data-l="You leave with">Captions that sell, a week of posts scheduled in Meta Business Suite, and a plan to move comments into DMs</td></tr>
 <tr><td>Class 3</td><td data-l="Date">Sat 19 Dec</td><td data-l="Topic"><strong>Get paid and track orders</strong></td><td data-l="You leave with">A Paystack payment link or free storefront, a payment message and a simple sales record done with AI</td></tr>
 <tr><td>Class 4</td><td data-l="Date">Sat 9 Jan 2027</td><td data-l="Topic"><strong>Product photos, flyers and pricing for profit</strong></td><td data-l="You leave with">Clean product photos, 3 flyers, and a lowest-price check for your top products</td></tr>
@@ -242,7 +244,8 @@
         <ul>
           <li><a href="free-class/">Free class</a></li>
           <li><a href="inner-circle/">Inner Circle</a></li>
-          <li><a href="reply-kit/">Free Customer Reply Kit</a></li>
+          <li><a href="store/">Ebook store</a></li>
+          <li><a href="account/">My library</a></li>
           <li><a href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">WhatsApp community</a></li>
         </ul>
       </div>
@@ -260,8 +263,9 @@
   </div>
 </footer>
 <div class="sticky-bar"><a class="btn" href="free-class/">Join the free class</a></div>
-<script src="assets/js/config.js?v=2"></script>
-<script src="assets/js/app.js?v=2"></script>
-<script src="assets/js/pages.js?v=2"></script>
+<script src="assets/js/config.js?v=3"></script>
+<script src="assets/js/app.js?v=3"></script>
+<script src="assets/js/auth.js?v=3"></script>
+<script src="assets/js/pages.js?v=3"></script><script src="assets/js/catalogue.js?v=3"></script><script src="assets/js/store.js?v=3"></script>
 </body>
 </html>

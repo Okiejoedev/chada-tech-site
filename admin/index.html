@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=2">
+<link rel="stylesheet" href="../assets/css/style.css?v=3">
 </head>
 <body data-page="admin" class="admin">
 
@@ -48,6 +48,10 @@
       <div class="tabs">
         <button class="on" data-at="class_registrations">Class registrations <span class="pill" id="n-class_registrations">0</span></button>
         <button data-at="memberships">Inner Circle <span class="pill" id="n-memberships">0</span></button>
+        <button data-at="profiles">Members <span class="pill" id="n-profiles">0</span></button>
+        <button data-at="purchases">Purchases <span class="pill" id="n-purchases">0</span></button>
+        <button data-at="products">Store <span class="pill" id="n-products">0</span></button>
+        <button data-at="book_interest">Notify me <span class="pill" id="n-book_interest">0</span></button>
         <button data-at="reply_kit_leads">Reply Kit leads <span class="pill" id="n-reply_kit_leads">0</span></button>
       </div>
       <div class="admin-bar">
@@ -60,12 +64,13 @@
       </div>
       <div class="form-alert" id="dash-alert"></div>
       <div class="table-wrap"><table id="tbl"></table></div>
+      <input type="file" id="upload-input" accept="application/pdf" class="hidden">
       <p class="small mt2">"Copy WhatsApp numbers" copies the numbers of the rows shown. Tick "Only opted in to updates" before copying numbers for a broadcast.</p>
     </div>
   </div>
 </main>
-<script src="../assets/js/config.js?v=2"></script>
-<script src="../assets/js/app.js?v=2"></script>
+<script src="../assets/js/config.js?v=3"></script>
+<script src="../assets/js/app.js?v=3"></script>
 <script src="../assets/js/vendor/supabase.js"></script>
-<script src="../assets/js/admin.js?v=2"></script>
+<script src="../assets/js/admin.js?v=3"></script>
 </body></html>

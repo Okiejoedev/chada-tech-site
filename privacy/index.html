@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=2">
+<link rel="stylesheet" href="../assets/css/style.css?v=3">
 </head>
 <body data-page="privacy">
 <a class="skip" href="#main">Skip to content</a>
@@ -33,19 +33,20 @@
   <div class="wrap">
     <a class="logo" href="../" aria-label="Chada Tech home"><img src="../assets/img/chada-tech-logo-horizontal-navy.svg" alt="Chada Tech" width="145" height="40"></a>
     <nav class="nav" aria-label="Main">
+      <a href="../store/">Ebook store</a>
       <a href="../free-class/">Free class</a>
       <a href="../inner-circle/">Inner Circle</a>
-      <a href="../reply-kit/">Free Reply Kit</a>
-      <a href="../#faq">FAQ</a>
+      <a href="../account/" data-account-link>Sign in</a>
       <a class="btn btn-sm" href="../free-class/">Join the free class</a>
     </nav>
     <button class="menu-btn" aria-label="Open menu" aria-expanded="false"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
   <div class="mobile-nav">
+    <a href="../store/">Ebook store</a>
     <a href="../free-class/">Free class</a>
     <a href="../inner-circle/">Inner Circle</a>
-    <a href="../reply-kit/">Free Reply Kit</a>
     <a href="../#faq">FAQ</a>
+    <a href="../account/" data-account-link>Sign in</a>
     <a class="btn" href="../free-class/">Join the free class</a>
   </div>
 </header>
@@ -63,6 +64,8 @@
       <li>Your name, WhatsApp number and email.</li>
       <li>What you sell or do, and how you heard about us.</li>
       <li>For the Student track: a proof of studentship (student ID or admission letter).</li>
+      <li>For your Chada Tech account: your name, WhatsApp number, email, a securely stored password, and the ebooks you buy or ask to be told about.</li>
+      <li>For ebook purchases: the amount, date and Paystack reference. Paystack handles your card or bank details; we never see them.</li>
       <li>For the Reply Kit: your first name, WhatsApp number, business name, what you sell, city and chosen tone. <strong>The bank details you type into the Reply Kit never leave your phone.</strong> We never see or store them.</li>
     </ul>
     <h2>3. Why we use it (and our legal basis)</h2>
@@ -75,6 +78,7 @@
     <h2>5. How long we keep it</h2>
     <ul>
       <li>Free class and Reply Kit sign-ups: 12 months.</li>
+      <li>Your account and library: until you ask us to delete your account. Purchase records are kept as long as the law requires for financial records.</li>
       <li>Member and payment records: <span data-c="memberRecordsRetention">as long as the law requires</span>.</li>
       <li>Student proofs: deleted 30 days after we check them.</li>
     </ul>
@@ -99,7 +103,8 @@
         <ul>
           <li><a href="../free-class/">Free class</a></li>
           <li><a href="../inner-circle/">Inner Circle</a></li>
-          <li><a href="../reply-kit/">Free Customer Reply Kit</a></li>
+          <li><a href="../store/">Ebook store</a></li>
+          <li><a href="../account/">My library</a></li>
           <li><a href="#" data-c-href="whatsappCommunityLink" target="_blank" rel="noopener">WhatsApp community</a></li>
         </ul>
       </div>
@@ -117,8 +122,9 @@
   </div>
 </footer>
 
-<script src="../assets/js/config.js?v=2"></script>
-<script src="../assets/js/app.js?v=2"></script>
+<script src="../assets/js/config.js?v=3"></script>
+<script src="../assets/js/app.js?v=3"></script>
+<script src="../assets/js/auth.js?v=3"></script>
 
 </body>
 </html>

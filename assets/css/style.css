@@ -137,7 +137,7 @@ details p{padding-bottom:20px;margin:0}
 .field label,.legend{display:block;font-weight:600;margin-bottom:6px;font-size:.95rem}
 .field .opt{font-weight:400;color:var(--muted)}
 .field .hint{font-size:.85rem;color:var(--muted);margin-top:6px}
-input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1.5px solid #C9D2E0;border-radius:14px;background:#fff;color:var(--ink);min-height:52px}
+input[type=text],input[type=tel],input[type=email],input[type=number],input[type=password],select,textarea{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1.5px solid #C9D2E0;border-radius:14px;background:#fff;color:var(--ink);min-height:52px}
 textarea{min-height:140px;resize:vertical;line-height:1.5}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(47,95,174,.15)}
 .field.invalid input,.field.invalid select{border-color:var(--err)}
@@ -235,3 +235,58 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
   .grid-4.compact .card p{font-size:.88rem}
   .grid-4.compact .icon-dot{width:40px;height:40px;margin-bottom:12px}
 }
+
+/* ===== accounts: modal + welcome card ===== */
+body.modal-open{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,20,40,.55);display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:640px){.modal{align-items:center;padding:24px}}
+.modal-card{position:relative;background:#fff;width:100%;max-width:480px;max-height:92vh;overflow:auto;border-radius:28px 28px 0 0;padding:28px 22px calc(24px + env(safe-area-inset-bottom))}
+@media(min-width:640px){.modal-card{border-radius:28px;padding:36px}}
+.modal-x{position:absolute;top:12px;right:14px;width:40px;height:40px;border:0;background:var(--grey);border-radius:50%;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--navy)}
+.welcome{position:fixed;left:12px;right:12px;bottom:84px;z-index:60;background:#fff;border-radius:24px;box-shadow:0 20px 50px rgba(4,45,106,.28);padding:18px 18px 18px;transform:translateY(140%);transition:transform .35s ease;max-width:460px;margin:0 auto;border:1px solid var(--line)}
+@media(min-width:900px){.welcome{left:auto;right:24px;bottom:24px}}
+.welcome.show{transform:none}
+.welcome .modal-x{width:32px;height:32px;font-size:1.2rem;top:8px;right:8px}
+.welcome-in{display:flex;gap:14px;align-items:flex-start;padding-right:24px}
+.welcome p{margin:4px 0 10px;font-size:.92rem;color:var(--muted)}
+.mini-cover{flex:0 0 74px;height:100px;border-radius:10px;background:linear-gradient(160deg,#0a3f8f,#042D6A 60%,#021a40);color:#fff;padding:8px;display:flex;flex-direction:column;justify-content:space-between;font-size:.62rem;line-height:1.2}
+.mini-cover span{color:var(--light);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.mini-cover b{font-size:.72rem}
+.linkish{background:none;border:0;color:var(--accent);font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;padding:8px 4px}
+.seg button{color:var(--ink)}
+
+/* ===== store ===== */
+.shelf{margin-top:40px}
+.shelf h2{font-size:1.4rem;margin-bottom:16px}
+.books{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:760px){.books{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1040px){.books{grid-template-columns:repeat(4,1fr)}}
+.book{background:#fff;border-radius:20px;border:1px solid var(--line);box-shadow:0 2px 12px rgba(4,45,106,.06);overflow:hidden;display:flex;flex-direction:column}
+.book-link{display:block;text-decoration:none}
+.book-body{padding:12px 12px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.book-title{color:var(--navy);font-weight:800;text-decoration:none;line-height:1.25;letter-spacing:-.01em;font-size:.98rem}
+.book-meta{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:auto;font-size:.95rem}
+.book .btn{min-height:42px;padding:8px 12px;font-size:.85rem;width:100%}
+.book .form-alert{font-size:.8rem;padding:8px 10px;margin:0}
+.book .pill{font-size:.7rem}
+.cover{position:relative;aspect-ratio:3/4;color:#fff;padding:14px 12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(160deg,#0a3f8f 0%,#042D6A 55%,#021a40 100%)}
+.cover::after{content:"";position:absolute;right:-30%;bottom:-18%;width:90%;aspect-ratio:1;background:url("../img/chada-tech-icon-white.svg") center/contain no-repeat;opacity:.07}
+.cover-label{font-size:.62rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--light);position:relative;z-index:1}
+.cover-title{font-weight:800;letter-spacing:-.02em;line-height:1.12;font-size:clamp(.95rem,3.6vw,1.2rem);position:relative;z-index:1}
+.cover-brand{display:flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;opacity:.9;position:relative;z-index:1}
+.cover-brand img{width:16px;height:16px}
+.cover::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--light)}
+.c-run::before{background:#B9D3F5}.c-prompt::before{background:#FFFFFF}.c-career::before{background:#9FD6C4}.c-earn::before{background:#F3D98B}.c-bundle::before{background:#F3D98B}.c-free::before{background:#9FD6C4}
+.c-bundle{background:linear-gradient(160deg,#1a2f55,#0b1730)}
+.cover.lg{border-radius:24px;max-width:340px;box-shadow:0 30px 60px rgba(4,45,106,.3)}
+.cover.lg .cover-title{font-size:1.7rem}
+.cover.lg .cover-label{font-size:.8rem}
+.cover.lg{padding:24px 22px}
+.book-hero{display:grid;gap:32px;align-items:start}
+@media(min-width:860px){.book-hero{grid-template-columns:340px 1fr}}
+.inside{list-style:none;padding:0;margin:0 0 20px}
+.inside li{padding:10px 0 10px 34px;position:relative;border-bottom:1px solid var(--line)}
+.inside li::before{content:"";position:absolute;left:4px;top:15px;width:16px;height:9px;border-left:3px solid var(--accent);border-bottom:3px solid var(--accent);transform:rotate(-45deg)}
+.price-big{font-size:2.2rem;font-weight:800;color:var(--navy);letter-spacing:-.03em;margin:0}
+.store-nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-top:20px}
+.store-nav a{white-space:nowrap;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--navy);text-decoration:none;font-weight:600;font-size:.88rem}

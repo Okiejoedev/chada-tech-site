@@ -13,8 +13,13 @@
   var COLS = {
     class_registrations: ["created_at", "class_code", "full_name", "whatsapp", "what_they_do", "email", "heard_from", "consent_updates", "source"],
     memberships: ["created_at", "track", "status", "full_name", "whatsapp", "email", "what_they_do", "founding", "paid_at", "renews_on", "proof_path", "consent_updates", "source", "notes"],
-    reply_kit_leads: ["created_at", "first_name", "whatsapp", "business_name", "what_they_sell", "city", "tone", "consent_updates", "source"]
+    reply_kit_leads: ["created_at", "first_name", "whatsapp", "business_name", "what_they_sell", "city", "tone", "consent_updates", "source"],
+    profiles: ["created_at", "full_name", "whatsapp", "email", "consent_updates", "source"],
+    purchases: ["created_at", "product_slug", "amount_kobo", "reference", "status", "user_id"],
+    products: ["slug", "title", "collection", "price_kobo", "wave", "status", "file_path"],
+    book_interest: ["created_at", "product_slug", "user_id"]
   };
+  var ORDER = { products: ["collection", true] };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function alertMsg(msg, ok) { var a = $("dash-alert"); a.className = "form-alert " + (msg ? (ok ? "success" : "error") : ""); a.textContent = msg || ""; }
   function fmt(k, v) {
@@ -47,7 +52,8 @@
   function loadAll(msg) {
     alertMsg(typeof msg === "string" ? msg : "", true);
     Promise.all(Object.keys(COLS).map(function (t) {
-      return sb.from(t).select("*").order("created_at", { ascending: false }).limit(5000).then(function (r) {
+      var o = ORDER[t] || ["created_at", false];
+      return sb.from(t).select("*").order(o[0], { ascending: o[1] }).limit(5000).then(function (r) {
         if (r.error) throw r.error; data[t] = r.data; $("n-" + t).textContent = r.data.length;
       });
     })).then(function () {
@@ -66,8 +72,14 @@
     } else if (table === "memberships") {
       ["pending", "paid", "waitlist", "cancelled", "refunded"].forEach(function (s) { opts.push(["status:" + s, "Status: " + s]); });
       ["business", "professional", "student"].forEach(function (s) { opts.push(["track:" + s, "Track: " + s]); });
-    } else {
+    } else if (table === "products") {
+      ["live", "coming_soon", "hidden"].forEach(function (s) { opts.push(["status:" + s, "Status: " + s]); });
+      ["sell", "run", "prompt", "career", "earn", "bundle", "free"].forEach(function (s) { opts.push(["collection:" + s, "Collection: " + s]); });
+    } else if (table === "reply_kit_leads") {
       ["friendly", "professional", "casual"].forEach(function (s) { opts.push(["tone:" + s, "Tone: " + s]); });
+    } else if (table === "purchases" || table === "book_interest") {
+      var sl = {}; (data[table] || []).forEach(function (r) { sl[r.product_slug] = 1; });
+      Object.keys(sl).sort().forEach(function (x) { opts.push(["product_slug:" + x, x]); });
     }
     var cur = f.value;
     f.innerHTML = opts.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
@@ -85,8 +97,8 @@
   function draw() {
     setFilter();
     rows = visible();
-    var cols = COLS[table], isM = table === "memberships";
-    var h = "<thead><tr>" + (isM ? "<th>Action</th>" : "") + cols.map(function (c) { return "<th>" + esc(c.replace(/_/g, " ")) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    var cols = COLS[table], isM = table === "memberships", isP = table === "products";
+    var h = "<thead><tr>" + (isM || isP ? "<th>Action</th>" : "") + cols.map(function (c) { return "<th>" + esc(c.replace(/_/g, " ")) + "</th>"; }).join("") + "</tr></thead><tbody>";
     rows.forEach(function (r) {
       h += "<tr>";
       if (isM) {
@@ -94,10 +106,16 @@
           '<select data-status="' + r.id + '" style="min-height:36px;padding:4px 8px;width:auto">' +
           ["pending", "paid", "waitlist", "cancelled", "refunded"].map(function (s) { return "<option" + (s === r.status ? " selected" : "") + ">" + s + "</option>"; }).join("") + "</select></td>";
       }
+      if (isP) {
+        h += '<td><select data-pstatus="' + esc(r.slug) + '" style="min-height:36px;padding:4px 8px;width:auto">' +
+          ["coming_soon", "live", "hidden"].map(function (s) { return "<option" + (s === r.status ? " selected" : "") + ">" + s + "</option>"; }).join("") +
+          '</select> ' + (r.is_bundle ? "" : '<button class="copy-btn" style="margin:0" data-upload="' + esc(r.slug) + '">' + (r.file_path ? "Replace PDF" : "Upload PDF") + "</button>") + "</td>";
+      }
       cols.forEach(function (c) {
         var v = fmt(c, r[c]);
+        if (c === "amount_kobo" || c === "price_kobo") v = "\u20a6" + (Number(r[c]) / 100).toLocaleString("en-NG");
         if (c === "status") v = '<span class="pill ' + esc(r.status) + '">' + esc(r.status) + "</span>";
-        else if (c === "whatsapp") v = '<a href="https://wa.me/' + esc(String(r.whatsapp).replace("+", "")) + '" target="_blank" rel="noopener">' + esc(r.whatsapp) + "</a>";
+        else if (c === "whatsapp" && r.whatsapp) v = '<a href="https://wa.me/' + esc(String(r.whatsapp).replace("+", "")) + '" target="_blank" rel="noopener">' + esc(r.whatsapp) + "</a>";
         else if (c === "proof_path" && r.proof_path) v = '<button class="copy-btn" style="margin:0" data-proof="' + esc(r.proof_path) + '">View proof</button>';
         else v = esc(v);
         h += "<td>" + v + "</td>";
@@ -148,6 +166,34 @@
     var id = s.getAttribute("data-status"), patch = { status: s.value };
     if (s.value === "paid") { patch.paid_at = new Date().toISOString(); patch.renews_on = addMonths(new Date(), 3); }
     update(id, patch, "Status changed to " + s.value + ".");
+  });
+
+  var uploadSlug = null;
+  document.addEventListener("click", function (e) {
+    var u = e.target.closest("[data-upload]"); if (!u) return;
+    uploadSlug = u.getAttribute("data-upload"); $("upload-input").value = ""; $("upload-input").click();
+  });
+  $("upload-input").addEventListener("change", function () {
+    var f = this.files[0]; if (!f || !uploadSlug) return;
+    if (f.type !== "application/pdf") return alertMsg("Please choose a PDF file.");
+    var path = uploadSlug + "/" + uploadSlug + ".pdf";
+    alertMsg("Uploading " + f.name + "\u2026", true);
+    sb.storage.from("ebooks").upload(path, f, { upsert: true, contentType: "application/pdf" }).then(function (r) {
+      if (r.error) return alertMsg("Upload failed: " + r.error.message);
+      return sb.from("products").update({ file_path: path, updated_at: new Date().toISOString() }).eq("slug", uploadSlug).then(function (r2) {
+        if (r2.error) return alertMsg("Saved the file but couldn't link it: " + r2.error.message);
+        loadAll("PDF uploaded for " + uploadSlug + ". Set its status to live when you're ready to sell it.");
+      });
+    });
+  });
+  document.addEventListener("change", function (e) {
+    var s = e.target.closest("[data-pstatus]"); if (!s) return;
+    var slug = s.getAttribute("data-pstatus"), row = data.products.find(function (x) { return x.slug === slug; });
+    if (s.value === "live" && !row.is_bundle && !row.file_path && row.price_kobo > 0 && !confirm("This ebook has no PDF yet. Buyers won't be able to download it. Make it live anyway?")) { s.value = row.status; return; }
+    sb.from("products").update({ status: s.value, updated_at: new Date().toISOString() }).eq("slug", slug).then(function (r) {
+      if (r.error) return alertMsg("Update failed: " + r.error.message);
+      loadAll(slug + " is now " + s.value + ".");
+    });
   });
 
   function csvCell(v) { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
